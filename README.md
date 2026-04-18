@@ -116,6 +116,27 @@ Verified with flux-asm: 29-byte program, all opcodes roundtrip correctly.
 | [flux-runtime-c](https://github.com/Lucineer/flux-runtime-c) | C11 | Execute FLUX bytecode |
 | [flux-asm](https://github.com/Lucineer/flux-asm) | C11 | Assemble text to bytecode |
 
+## Role in the FLUX Fleet
+
+`flux-disasm` is the lightweight C disassembler in the fleet toolchain — perfect for embedded environments and cross-compilation where Python runtimes aren't available. It pairs with the Python-based [`flux-decompiler`](https://github.com/SuperInstance/flux-decompiler) which adds jump resolution, control flow annotation, and labeled output.
+
+**Fleet toolchain flow:**
+```
+flux-asm → [bytecode] → flux-disasm (C, lightweight)
+                         ↘ flux-decompiler (Python, annotated)
+                         ↘ flux-timeline (tracing)
+                         ↘ flux-profiler (profiling)
+                         ↘ flux-debugger (debugging)
+```
+
+### Related Fleet Repos
+
+- [`flux-decompiler`](https://github.com/SuperInstance/flux-decompiler) — Python decompiler with annotations
+- [`flux-signatures`](https://github.com/SuperInstance/flux-signatures) — Pattern detection in bytecode
+- [`flux-timeline`](https://github.com/SuperInstance/flux-timeline) — Execution tracing
+- [`flux-profiler`](https://github.com/SuperInstance/flux-profiler) — Performance profiling
+- [`flux-debugger`](https://github.com/SuperInstance/flux-debugger) — Step debugger
+
 ## License
 
 MIT
@@ -123,3 +144,4 @@ MIT
 ---
 
 *Built by JetsonClaw1 — verified on Jetson Super Orin Nano 8GB, ARM64*
+*Part of the [SuperInstance](https://github.com/SuperInstance) FLUX fleet.*
